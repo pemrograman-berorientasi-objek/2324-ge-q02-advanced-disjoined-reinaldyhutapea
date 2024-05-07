@@ -312,7 +312,44 @@ public class Driver1 {
                 System.out.println(selectedStudent.getId() + "|" + selectedStudent.getName() + "|" +
                         selectedStudent.getYear() + "|" + selectedStudent.getMajor() + "|" +
                         String.format("%.2f", gpa) + "|" + getTotalCredits(studentEnrollments, courses));
-            } else if (command.equals("find-the-best-student")) {
+            } 
+            
+            
+            else if(command.equals("---")) {
+                for (Lecturer lecturer : lecturers) {
+                    System.out.println(lecturer.getId() + "|" + lecturer.getName() + "|" + lecturer.getInitial() + "|" + lecturer.getEmail() + "|" + lecturer.getStudyProgram());
+                }
+                for (Course course : courses) {
+                    System.out.println(course.getCode() + "|" + course.getName() + "|" + course.getCredits() + "|" + course.passingGrade());
+                }
+                for (Student student : students) {
+                    System.out.println(student.getId() + "|" + student.getName() + "|" + student.getYear() + "|" + student.getMajor());
+                }
+
+
+                // Bagian yang mengatur pencetakan output
+                for (Course course : courses) {
+                    for (Enrollment enrollment : enrollments) {
+                        if (enrollment.getCourseId().equals(course.getCode())) {
+                            //cek apakah enrolment ada di remedialRecords
+                            boolean isRemedial = remedialRecords.contains(enrollment.getCourseId() + "|" + enrollment.getStudentId() + "|" + enrollment.getAcademicYear() + "|" + enrollment.getSemester());
+                            // jika ada, cetak output remedial
+                            if (isRemedial) {
+                                String previous = previousGrades.get(enrollment.getCourseId() + "|" + enrollment.getStudentId());
+                                System.out.println(enrollment.getCourseId() + "|" + enrollment.getStudentId() + "|" + enrollment.getAcademicYear() + "|" + enrollment.getSemester() + "|" + enrollment.getGrade() + "(" + previous + ")");
+                            } else {
+                                System.out.println(enrollment.getCourseId() + "|" + enrollment.getStudentId() + "|" + enrollment.getAcademicYear() + "|" + enrollment.getSemester() + "|" + enrollment.getGrade());
+                            }
+                        }
+                    }
+
+                }
+                //cetak best-student 
+                
+               
+              
+                
+            }else if (command.equals("find-the-best-student")) {
                 String year= data[1];
                 String semester=data[2];
 
@@ -353,43 +390,6 @@ public class Driver1 {
             } 
 
             
-            
-            else {
-                for (Lecturer lecturer : lecturers) {
-                    System.out.println(lecturer.getId() + "|" + lecturer.getName() + "|" + lecturer.getInitial() + "|" + lecturer.getEmail() + "|" + lecturer.getStudyProgram());
-                }
-                for (Course course : courses) {
-                    System.out.println(course.getCode() + "|" + course.getName() + "|" + course.getCredits() + "|" + course.passingGrade());
-                }
-                for (Student student : students) {
-                    System.out.println(student.getId() + "|" + student.getName() + "|" + student.getYear() + "|" + student.getMajor());
-                }
-
-
-                // Bagian yang mengatur pencetakan output
-                for (Course course : courses) {
-                    for (Enrollment enrollment : enrollments) {
-                        if (enrollment.getCourseId().equals(course.getCode())) {
-                            //cek apakah enrolment ada di remedialRecords
-                            boolean isRemedial = remedialRecords.contains(enrollment.getCourseId() + "|" + enrollment.getStudentId() + "|" + enrollment.getAcademicYear() + "|" + enrollment.getSemester());
-                            // jika ada, cetak output remedial
-                            if (isRemedial) {
-                                String previous = previousGrades.get(enrollment.getCourseId() + "|" + enrollment.getStudentId());
-                                System.out.println(enrollment.getCourseId() + "|" + enrollment.getStudentId() + "|" + enrollment.getAcademicYear() + "|" + enrollment.getSemester() + "|" + enrollment.getGrade() + "(" + previous + ")");
-                            } else {
-                                System.out.println(enrollment.getCourseId() + "|" + enrollment.getStudentId() + "|" + enrollment.getAcademicYear() + "|" + enrollment.getSemester() + "|" + enrollment.getGrade());
-                            }
-                        }
-                    }
-
-                }
-                //cetak best-student 
-                
-               
-              
-                
-                break;
-            }
         }
 
         scanner.close();
