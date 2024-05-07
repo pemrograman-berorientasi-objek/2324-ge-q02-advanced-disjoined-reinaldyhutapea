@@ -338,7 +338,7 @@ public class Driver1 {
                             if (e.getStudentId().equals(bestStudentId) && e.getAcademicYear().equals(year)) {
                                 bestGradeA = e.getGrade();
                             }
-                            if (e.getStudentId().equals(bestStudentId) && e.getSemester().equals(semester)  && e.getAcademicYear().equals(year)) {
+                            if (e.getStudentId().equals(bestStudentId) && e.getSemester().equals("odd")  && e.getAcademicYear().equals(year)) {
                                 bestGradeB = e.getGrade();
                             }
                             
