@@ -347,6 +347,7 @@ public class Driver1 {
                 }
              
                //cetak best-student
+                System.out.println(bestStudentId + "|" + bestGradeB + "/" +bestGradeA);
               
              
             } 
